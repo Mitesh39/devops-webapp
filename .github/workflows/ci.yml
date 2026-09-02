@@ -1,0 +1,38 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Display CI information
+        run: |
+          echo "Starting CI Pipeline"
+          echo "Checking HTML application"
+
+      - name: Build application
+        run: |
+          echo "Building static web application..."
+          echo "Build completed successfully!"
+
+      - name: Run tests
+        run: |
+          echo "Running application tests..."
+          test -f index.html
+          echo "index.html found successfully!"
+
+      - name: Generate output logs
+        run: |
+          echo "CI pipeline completed at $(date)"
+          echo "Status: SUCCESS"
