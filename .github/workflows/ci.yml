@@ -36,3 +36,11 @@ jobs:
         run: |
           echo "CI pipeline completed at $(date)"
           echo "Status: SUCCESS"
+      - name: Send Slack notification
+        if: always()
+        uses: slackapi/slack-github-action@v4.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: "CI Pipeline result: ${{ job.status }} for ${{ github.repository }}"
